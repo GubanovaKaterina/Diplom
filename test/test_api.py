@@ -4,7 +4,17 @@ import pytest
 from datetime import datetime, timedelta
 
 # Данные авторизации
-
+login = 'gubanova.katerina@internet.ru'
+password = 'chxe44'
+base_url = 'https://api.yclients.com/api/v1'
+bearer_token = 'kfmybpg59cagpga4ms5j'
+partner_token = 1819386
+id = 13990248
+user_token = 'a3628804633cfc22113f7c37183e6234'
+api_id = 15093
+company_id = 1819386
+staff_id = 5171175
+service_id = 27725655
 
 # Заголовки
 headers = {

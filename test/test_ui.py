@@ -17,7 +17,8 @@ from selenium.common.exceptions import ElementClickInterceptedException, \
     TimeoutException
 
 # Данные для входа
-
+LOGIN = 'gubanova.katerina@internet.ru'
+PASSWORD = 'chxe44'
 
 
 class YclientsAuth:
@@ -464,9 +465,9 @@ class TestYclientsFinanceReport:
 
         with allure.step("ШАГ 4: Переход в 'Финансовый отчет'"):
             finance_report_link = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR,
-                                            "a[data-locator='link_\
-                                                report.finances.period']"))
+                EC.element_to_be_clickable
+                ((By.CSS_SELECTOR,
+                  "a[data-locator='link_report.finances.period']"))
             )
             self.click_with_scroll(driver, finance_report_link)
             time.sleep(3)
@@ -496,9 +497,9 @@ class TestYclientsFinanceReport:
             )
 
         with allure.step("ШАГ 6: Нажать кнопку 'Показать'"):
-            show_button = driver.find_element(By.CSS_SELECTOR,
-                                              "input[type='submit']\
-                                                [value='Показать']")
+            show_button = driver.find_element
+            (By.CSS_SELECTOR,
+             "input[type='submit'][value='Показать']")
             show_button.click()
             time.sleep(5)
             auth.take_screenshot("report_shown")
@@ -677,8 +678,8 @@ class TestYclientsSaleCertificate:
     def safe_click(self, driver, element, wait_time=0.5):
         """Безопасный клик по элементу с несколькими попытками"""
         try:
-            driver.execute_script("arguments[0].scrollIntoView({block: \
-                                  'center', behavior: 'smooth'});", element)
+            driver.execute_script("arguments[0].scrollIntoView\
+                 ({block:'center', behavior: 'smooth'});", element)
             time.sleep(wait_time)
             element.click()
             return True
@@ -783,9 +784,9 @@ class TestYclientsSaleCertificate:
 
         with allure.step("ШАГ 3: Выбрать 'Сертификат'"):
             cert_button = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR,
-                                            "button[data-locator=\
-                                                'button_sale_certificates']"))
+                EC.element_to_be_clickable
+                ((By.CSS_SELECTOR,
+                  "button[data-locator='button_sale_certificates']"))
             )
             self.safe_click(driver, cert_button)
             time.sleep(2)
@@ -793,9 +794,9 @@ class TestYclientsSaleCertificate:
 
         with allure.step(f"ШАГ 4: Ввести имя клиента: {client_name}"):
             name_field = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR,
-                                                "input[data-locator=\
-                                                    'client-name']"))
+                EC.presence_of_element_located
+                ((By.CSS_SELECTOR,
+                  "input[data-locator='client-name']"))
             )
             self.safe_send_keys(driver, name_field, client_name)
             time.sleep(1.5)
@@ -812,11 +813,9 @@ class TestYclientsSaleCertificate:
         with allure.step(f"ШАГ 6: Ввести название сертификата: \
                          {certificate_name}"):
             goods_field = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR,
-                                                "input[data-locator=\
-                                                    'goods_selling_\
-                                                        goods_table_\
-                                                            row_good']"))
+                EC.presence_of_element_located
+                ((By.CSS_SELECTOR,
+                  "input[data-locator='goods_selling_goods_table_row_good']"))
             )
             self.safe_send_keys(driver, goods_field, certificate_name)
             time.sleep(2)
@@ -853,9 +852,9 @@ class TestYclientsSaleCertificate:
             auth.take_screenshot("ai_icon_clicked")
 
             code_field = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR,
-                                                "input[data-locator=\
-                                                    'certificate-input']"))
+                EC.presence_of_element_located
+                ((By.CSS_SELECTOR,
+                  "input[data-locator='certificate-input']"))
             )
             generated_code = code_field.get_attribute("value")
 
@@ -865,9 +864,9 @@ class TestYclientsSaleCertificate:
 
         with allure.step("ШАГ 9: Сохранить и оплатить"):
             save_button = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR,
-                                            "button[data-locator=\
-                                                'go-to-payment-button']"))
+                EC.element_to_be_clickable
+                ((By.CSS_SELECTOR,
+                  "button[data-locator='go-to-payment-button']"))
             )
             self.safe_click(driver, save_button)
             time.sleep(3)
@@ -877,10 +876,9 @@ class TestYclientsSaleCertificate:
             # Проверяем, что находимся в окне оплаты
             try:
                 payment_modal = WebDriverWait(driver, 5).until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR,
-                                                    "div[data-locator=\
-                                                        'modal_header_\
-                                                            title']"))
+                    EC.presence_of_element_located
+                    ((By.CSS_SELECTOR,
+                      "div[data-locator='modal_header_title']"))
                 )
                 assert "Продажа товара" in payment_modal.text or \
                     "Оплата" in payment_modal.text, \
@@ -1004,10 +1002,9 @@ class TestYclientsCreateService:
         with allure.step("ШАГ 4: Переход в 'Услуги'"):
             # Ищем ссылку "Услуги"
             services_link = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR,
-                                            "a[data-locator="
-                                            "'link_settings_\
-                                            basic.services']"))
+                EC.element_to_be_clickable
+                ((By.CSS_SELECTOR,
+                  "a[data-locator='link_settings_basic.services']"))
             )
             self.safe_click(driver, services_link)
             time.sleep(3)
@@ -1046,10 +1043,10 @@ class TestYclientsCreateService:
         with allure.step("ШАГ 6: Выбрать категорию услуги"):
             category_card = None
             category_locators = [
-                (By.CSS_SELECTOR, "y-core-card-button.\
-                 create-services-modal__card"),
-                (By.CSS_SELECTOR, "y-core-card-button[data-locator=\
-                 'y-core-card-button']"),
+                (By.CSS_SELECTOR,
+                 "y-core-card-button.create-services-modal__card"),
+                (By.CSS_SELECTOR,
+                 "y-core-card-button[data-locator='y-core-card-button']"),
                 (By.CSS_SELECTOR, ".create-services-modal__card"),
                 (By.XPATH, "//y-core-card-button[contains(@class, \
                  'create-services-modal__card')]"),
@@ -1138,8 +1135,8 @@ class TestYclientsCreateService:
             save_locators = [
                 # Точный селектор из вашего HTML
                 (By.CSS_SELECTOR, "button[data-locator='save_btn']"),
-                (By.CSS_SELECTOR, "button.services-settings-\
-                 salon-controls__btn"),
+                (By.CSS_SELECTOR,
+                 "button.services-settings-salon-controls__btn"),
                 (By.XPATH, "//button[contains(@class, \
                  'services-settings-salon-controls__btn')]"),
                 (By.XPATH, "//button[contains(text(), 'Создать')]"),
@@ -1408,9 +1405,9 @@ class TestYclientsDeleteService:
 
         with allure.step("ШАГ 4: Переход в 'Услуги'"):
             services_link = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR,
-                                            "a[data-locator='link_\
-                                                settings_basic.services']"))
+                EC.element_to_be_clickable
+                ((By.CSS_SELECTOR,
+                  "a[data-locator='link_settings_basic.services']"))
             )
             self.safe_click(driver, services_link)
             time.sleep(3)
@@ -1563,12 +1560,12 @@ class TestYclientsDeleteService:
         with allure.step("ШАГ 9: Нажать кнопку 'Удалить'"):
             confirm_delete_button = None
             confirm_locators = [
-                (By.CSS_SELECTOR, "button[data-locator=\
-                 'apply_delete_button']"),
+                (By.CSS_SELECTOR,
+                 "button[data-locator='apply_delete_button']"),
                 (By.XPATH, "//button[contains(text(), 'Удалить') \
                  and not(contains(text(), 'услугу'))]"),
-                (By.CSS_SELECTOR, "button.yc-btn[data-locator=\
-                 'apply_delete_button']")
+                (By.CSS_SELECTOR,
+                 "button.yc-btn[data-locator='apply_delete_button']")
             ]
 
             for locator in confirm_locators:
